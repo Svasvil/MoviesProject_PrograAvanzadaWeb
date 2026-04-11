@@ -12,9 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BussinessLogic%28Services%29\Logic\" />
-    <Folder Include="BussinessLogic%28Services%29\Interfaces\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="BussinessLogic%28Services%29\Interfaces\NewFolder\" />
+    <Folder Include="BussinessLogic%28Services%29\Logic\Movies\" />
   </ItemGroup>
 
 </Project>
