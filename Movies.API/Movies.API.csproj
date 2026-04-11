@@ -15,8 +15,6 @@
     <Folder Include="BussinessLogic%28Services%29\Logic\" />
     <Folder Include="BussinessLogic%28Services%29\Interfaces\" />
     <Folder Include="Controllers\" />
-    <Folder Include="DataAccess%28Repository%29\Interfaces\" />
-    <Folder Include="DataAccess%28Repository%29\Logic\Movies\" />
   </ItemGroup>
 
 </Project>
