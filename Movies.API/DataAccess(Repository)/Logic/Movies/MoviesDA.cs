@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Movies.API.DataAccess_Repository_.Interfaces.Movies;
 using Movies.API.DatabasesConnections;
 using Movies.API.Models;
 

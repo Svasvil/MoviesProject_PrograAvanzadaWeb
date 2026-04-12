@@ -1,83 +1,44 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Movies.API.Controllers
 {
-    public class MoviesController : Controller
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class MoviesController : ControllerBase
     {
-        // GET: MoviesController
-        public ActionResult Index()
+      private readonly
+            
+            BussinessLogic_Services_.Interfaces.NewFolder.I_Movies_BL _moviesBL;
+        public MoviesController(BussinessLogic_Services_.Interfaces.NewFolder.I_Movies_BL moviesBL)
         {
-            return View();
+            _moviesBL = moviesBL;
         }
-
-        // GET: MoviesController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetMovies()
         {
-            return View();
+            var movies = await _moviesBL.GetMovies();
+            return Ok(movies);
         }
-
-        // GET: MoviesController/Create
-        public ActionResult Create()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMovieById(int id)
         {
-            return View();
+            var movie = await _moviesBL.GetMovieById(id);
+            if (movie == null) return NotFound();
+            return Ok(movie);
         }
-
-        // POST: MoviesController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> AddMovie()
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var newMovie = await _moviesBL.AddMovie();
+            return CreatedAtAction(nameof(GetMovieById), new { id = newMovie.Id }, newMovie);
         }
-
-        // GET: MoviesController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMovie(int id)
         {
-            return View();
-        }
-
-        // POST: MoviesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: MoviesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MoviesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var result = await _moviesBL.UpdateMovie(id);
+            if (!result) return NotFound();
+            return NoContent();
         }
     }
 }
