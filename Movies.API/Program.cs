@@ -1,15 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using Movies.API.BussinessLogic_Services_.Interfaces.NewFolder;
+using Movies.API.BussinessLogic_Services_.Logic.Movies;
+using Movies.API.DataAccess_Repository_.Interfaces.Movies;
+using Movies.API.DataAccess_Repository_.Logic;
+using Movies.API.DatabasesConnections;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddDbContext<ObjContex>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IMoviesDA, MoviesDA>();
+
+builder.Services.AddScoped<I_Movies_BL, Movies_BL>();
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
