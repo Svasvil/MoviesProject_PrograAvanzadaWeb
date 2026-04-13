@@ -1,8 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Cartelera de Películas";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🎬 Cartelera de Estrenos</h2>
+        <div class="d-flex">
+            <input id="txtBuscar" class="form-control me-2" type="number" placeholder="ID de película (ej: 550)">
+            <button class="btn btn-primary" onclick="buscarPelicula()">Buscar</button>
+        </div>
+    </div>
+
+    <div id="contenedorPeliculas" class="row">
+        <div class="text-center w-100">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}
