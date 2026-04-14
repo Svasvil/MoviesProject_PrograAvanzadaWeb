@@ -1,4 +1,5 @@
 ﻿using Movies.API.DTOs.Movies;
+using Movies.API.Models;
 
 namespace Movies.API.BussinessLogic_Services_.Interfaces.NewFolder
 {
@@ -7,8 +8,8 @@ namespace Movies.API.BussinessLogic_Services_.Interfaces.NewFolder
         Task<List<MovieDTO>> GetMovies();
 
         Task<MovieDTO> GetMovieById(int id);
-        Task<MovieDTO> AddMovie();
-        Task<bool> UpdateMovie(int id);
+        Task<MovieDTO> AddMovie(MovieModel movie);
+            Task<bool> UpdateMovie(int id);
                 
     }
 }

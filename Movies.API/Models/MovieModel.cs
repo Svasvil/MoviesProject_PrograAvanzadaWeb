@@ -1,9 +1,13 @@
-﻿namespace Movies.API.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Movies.API.Models
 {
     public class MovieModel
     {
         //Estos datos son los que agarre con un get de la APi de The Movie DB, por eso se llaman asi, para que se mapeen bien
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)] public int Id { get; set; }
         public string Title { get; set; }
         public string Overview { get; set; }
         public string Release_Date { get; set; }

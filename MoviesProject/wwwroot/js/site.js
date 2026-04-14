@@ -42,13 +42,14 @@ function renderizarPeliculas(movies) {
 
     movies.forEach(movie => {
         const card = `
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 shadow-sm text-center">
+            <div class="col-md-3 mb-5">
+                <div class="card card-vhs h-100">
                     <img src="${movie.posterUrl}" class="card-img-top" alt="${movie.title}">
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-title">${movie.title}</h6>
-                        <button class="btn btn-dark btn-sm mt-auto" onclick="verDetalle(${movie.id})">
-                            Reservar
+                    <div class="card-body">
+                        <div class="vhs-label">${movie.title}</div>
+                        <p class="text-muted mt-2" style="font-size: 0.7rem;">ID: ${movie.id}</p>
+                        <button class="retro-btn w-100 mt-auto" onclick="verDetalle(${movie.id})">
+                            RENTAR
                         </button>
                     </div>
                 </div>
@@ -56,9 +57,42 @@ function renderizarPeliculas(movies) {
         contenedor.innerHTML += card;
     });
 }
+async function verDetalle(id) {
+    try {
+        // 1. Obtener datos de la Minimal API (Puerto 7232)
+        const responseTMDB = await fetch(`https://localhost:7232/api/Movies/${id}`);
+        if (!responseTMDB.ok) throw new Error("No se encontró la película en TMDB");
 
-function verDetalle(id) {
-    alert("Película seleccionada ID: " + id);
+        const movieData = await responseTMDB.json();
+
+        // 2. Mapeo exacto al MovieModel de C#
+        const movieToSave = {
+            id: parseInt(movieData.id), // Aseguramos que sea entero
+            title: movieData.title || "Sin título",
+            overview: movieData.overview || "Sin descripción",
+            release_Date: movieData.release_date || "2026-01-01",
+            poster_Path: movieData.posterUrl || "",
+            backdrop_Path: "",
+            vote_Average: parseFloat(movieData.vote_average) || 0
+        };
+
+        // 3. POST a la API del CRUD (Puerto 7227)
+        const res = await fetch('https://localhost:7227/api/Movies', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(movieToSave)
+        });
+
+        if (res.ok) {
+            alert(`📼 ¡RESERVADA!: ${movieData.title}`);
+        } else {
+            const errorText = await res.text();
+            console.error("Error del servidor:", errorText);
+            alert("Error 500: La base de datos rechazó la película.");
+        }
+
+    } catch (error) {
+        console.error("Fallo en el fetch:", error);
+    }
 }
-
 document.addEventListener("DOMContentLoaded", cargarCartelera);

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Movies.API.DatabasesConnections;
 
@@ -10,9 +11,11 @@ using Movies.API.DatabasesConnections;
 namespace Movies.API.Migrations
 {
     [DbContext(typeof(ObjContex))]
-    partial class ObjContexModelSnapshot : ModelSnapshot
+    [Migration("20260414001500_AjusteModeloId")]
+    partial class AjusteModeloId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
