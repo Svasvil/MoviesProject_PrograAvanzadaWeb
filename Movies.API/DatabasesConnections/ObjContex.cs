@@ -8,6 +8,7 @@ namespace Movies.API.DatabasesConnections
         public ObjContex(DbContextOptions<ObjContex> opts) : base(opts) { }
 
         public DbSet<MovieModel> Movie { get; set; } = null!;
+        public DbSet<UserModel> User { get; set; } = null!;
     }
 
     

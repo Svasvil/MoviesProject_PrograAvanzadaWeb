@@ -15,34 +15,22 @@ namespace Movies.API.BussinessLogic_Services_.Logic.Movies
 
         }
         //create a new movie 
-        public async Task<MovieDTO> AddMovie()
+        public async Task<MovieDTO> AddMovie(MovieModel model)
         {
-            var movies = new MovieModel
-            {
-                Id = 0,
-                Title = "string",
-                Overview = "string",
-                Release_Date = "string",
-                Poster_Path = "string",
-                Backdrop_Path = "string",
-                Vote_Average = 0
-            };
-
-            var newMovies = await _Movies.AddMovies(movies);
-
+            // Usamos el modelo que viene por parámetro en lugar de los strings fijos
+            var newMovies = await _Movies.AddMovies(model);
 
             return new MovieDTO(
-               newMovies.Id,
+                newMovies.Id,
                 newMovies.Title,
                 newMovies.Overview,
                 newMovies.Release_Date,
                 newMovies.Poster_Path,
                 newMovies.Backdrop_Path,
                 newMovies.Vote_Average
-                );
-
-
+            );
         }
+        
         //update movie 
         public async Task<bool> UpdateMovie(int id)
         {
