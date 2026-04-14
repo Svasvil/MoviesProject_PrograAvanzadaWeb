@@ -63,6 +63,28 @@ namespace MoviesProject.Controllers
             return View();
         }
 
-       
+        [HttpPost]
+        public async Task<IActionResult> Create(UserModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    TempData["Error"] = "Los datos del usuario son inválidos.";
+                    return RedirectToAction("Index");
+                }
+
+                await _userApiCall.CreateUserAsync(model.Nombre, model.Apellido, model.Email);
+
+                TempData["Success"] = "Usuario creado correctamente.";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "No se pudo crear el usuario: " + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
