@@ -11,8 +11,8 @@ using Movies.API.DatabasesConnections;
 namespace Movies.API.Migrations
 {
     [DbContext(typeof(ObjContex))]
-    [Migration("20260412041019_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260414014935_buildDatabase")]
+    partial class buildDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,10 +27,7 @@ namespace Movies.API.Migrations
             modelBuilder.Entity("Movies.API.Models.MovieModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Backdrop_Path")
                         .IsRequired()

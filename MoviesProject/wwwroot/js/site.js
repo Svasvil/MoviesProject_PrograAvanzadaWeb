@@ -59,15 +59,14 @@ function renderizarPeliculas(movies) {
 }
 async function verDetalle(id) {
     try {
-        // 1. Obtener datos de la Minimal API (Puerto 7232)
+       
         const responseTMDB = await fetch(`https://localhost:7232/api/Movies/${id}`);
         if (!responseTMDB.ok) throw new Error("No se encontró la película en TMDB");
 
         const movieData = await responseTMDB.json();
 
-        // 2. Mapeo exacto al MovieModel de C#
         const movieToSave = {
-            id: parseInt(movieData.id), // Aseguramos que sea entero
+            id: parseInt(movieData.id), 
             title: movieData.title || "Sin título",
             overview: movieData.overview || "Sin descripción",
             release_Date: movieData.release_date || "2026-01-01",
@@ -76,7 +75,6 @@ async function verDetalle(id) {
             vote_Average: parseFloat(movieData.vote_average) || 0
         };
 
-        // 3. POST a la API del CRUD (Puerto 7227)
         const res = await fetch('https://localhost:7227/api/Movies', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

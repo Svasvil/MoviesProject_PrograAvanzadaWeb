@@ -34,7 +34,7 @@ namespace Movies.API.Controllers
             if (movie == null) return BadRequest();
 
      
-            movie.Id = 0;
+          
 
             var newMovie = await _moviesBL.AddMovie(movie);
 

@@ -5,27 +5,24 @@
 namespace Movies.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class buildDatabase2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Movie",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Overview = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Release_Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Poster_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Backdrop_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Vote_Average = table.Column<double>(type: "float", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movie", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
         }
 
@@ -33,7 +30,7 @@ namespace Movies.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "User");
         }
     }
 }
