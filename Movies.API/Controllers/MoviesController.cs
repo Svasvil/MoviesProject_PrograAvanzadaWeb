@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Movies.API.Models;
 
 namespace Movies.API.Controllers
 {
@@ -28,10 +29,16 @@ namespace Movies.API.Controllers
             return Ok(movie);
         }
         [HttpPost]
-        public async Task<IActionResult> AddMovie()
+        public async Task<IActionResult> AddMovie([FromBody] MovieModel movie)
         {
-            var newMovie = await _moviesBL.AddMovie();
-            return CreatedAtAction(nameof(GetMovieById), new { id = newMovie.Id }, newMovie);
+            if (movie == null) return BadRequest();
+
+     
+          
+
+            var newMovie = await _moviesBL.AddMovie(movie);
+
+            return Ok(newMovie);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMovie(int id)
