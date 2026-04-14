@@ -23,12 +23,12 @@ namespace MoviesProject.Views
                 throw new Exception($"Error al obtener usuarios: {response.ReasonPhrase}");
             }
         }
-        public async Task CreateUserAsync(string Nombre, string Apellidos, string email, CancellationToken cancellation = default)
+        public async Task CreateUserAsync(string Nombre, string Apellido, string email, CancellationToken cancellation = default)
         {
             var newUser = new UserModel
             {
                 Nombre = Nombre,
-                Apellido = Apellidos,
+                Apellido = Apellido,
                 Email = email
             };
             var response = await _conexion.PostAsJsonAsync("api/User", newUser, cancellation);

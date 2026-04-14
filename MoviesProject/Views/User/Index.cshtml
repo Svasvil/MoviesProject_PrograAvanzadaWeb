@@ -27,7 +27,6 @@
             </div>
 
             <div class="modal-body">
-                @* Cambia 'Caso2.Models.UserModel' por el namespace correcto de tu modelo *@
                 @await Html.PartialAsync("_CreateUserPartial", new MoviesProject.Models.UserModel())
             </div>
         </div>
@@ -52,7 +51,7 @@
                         <tr>
 
                             <td>
-                                <strong>@user.Nombre @user.Apellidos</strong>
+                                <strong>@user.Nombre @user.Apellido</strong>
                             </td>
 
                         </tr>
