@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MoviesProject.Models;
 using MoviesProject.Services.Users;
 
 namespace MoviesProject.Controllers
@@ -19,22 +20,28 @@ namespace MoviesProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email)
+        public async Task<IActionResult> Login(string email, string password)
         {
+            if (email == "admin@retro.com" && password == "admin123")
+            {
+                TempData["UserLogged"] = "ADMIN MASTER";
+                TempData.Keep("UserLogged");
+                return RedirectToAction("Index", "Home");
+            }
+
             var usuarios = await _userApiCall.GetUsers();
-            var usuarioEncontrado = usuarios.FirstOrDefault(u => u.Email.Trim().ToLower() == email.Trim().ToLower());
+
+            var usuarioEncontrado = usuarios.FirstOrDefault(u =>
+                u.Email.Trim().ToLower() == email.Trim().ToLower());
 
             if (usuarioEncontrado != null)
             {
                 TempData["UserLogged"] = usuarioEncontrado.Nombre;
-
-
                 TempData.Keep("UserLogged");
-
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Error = "El correo no coincide con ningún usuario registrado.";
+            ViewBag.Error = "CREDENCIALES INVÁLIDAS";
             return View();
         }
 
@@ -50,5 +57,12 @@ namespace MoviesProject.Controllers
             var userList = await _userApiCall.GetUsers();
             return View(userList.OrderBy(u => u.Id));
         }
+        [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+       
     }
 }

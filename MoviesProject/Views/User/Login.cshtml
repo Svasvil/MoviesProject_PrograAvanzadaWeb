@@ -1,12 +1,13 @@
-﻿<div class="card mx-auto" style="max-width: 400px; margin-top: 50px;">
-    <div class="card-body">
-        <h3 class="text-center">Retro Club Login</h3>
-        <form asp-action="Login" method="post">
-            <div class="mb-3">
-                <label>Correo Electrónico</label>
-                <input type="email" name="email" class="form-control" placeholder="usuario@correo.com" required />
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-        </form>
+﻿<form asp-action="Login" method="post">
+    <div class="mb-3 text-start">
+        <label class="form-label">Terminal ID (Email):</label>
+        <input type="email" name="email" class="form-control retro-input" placeholder="ADMIN@RETRO.COM" required />
     </div>
-</div>
+
+    <div class="mb-3 text-start">
+        <label class="form-label">Access Code (Password):</label>
+        <input type="password" name="password" class="form-control retro-input" placeholder="********" required />
+    </div>
+
+    <button type="submit" class="btn btn-retro">EXECUTE LOGIN</button>
+</form>
