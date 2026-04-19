@@ -1,6 +1,6 @@
 ﻿async function cargarCartelera() {
     try {
-        const res = await fetch('https://localhost:7232/api/Movies/top-rated');
+        const res = await fetch('http://localhost:5085/api/Movies/top-rated');
         if (!res.ok) throw new Error("Error en la API");
 
         const movies = await res.json();
@@ -20,7 +20,7 @@ async function buscarPelicula() {
     }
 
     try {
-        const res = await fetch(`https://localhost:7232/api/Movies/${id}`);
+        const res = await fetch(`http://localhost:5085/api/Movies/${id}`);
 
         if (!res.ok) {
             alert("No se encontró ninguna película con ese ID");
@@ -60,7 +60,7 @@ function renderizarPeliculas(movies) {
 async function verDetalle(id) {
     try {
        
-        const responseTMDB = await fetch(`https://localhost:7232/api/Movies/${id}`);
+        const responseTMDB = await fetch(`http://localhost:5085/api/Movies/${id}`);
         if (!responseTMDB.ok) throw new Error("No se encontró la película en TMDB");
 
         const movieData = await responseTMDB.json();
@@ -75,7 +75,7 @@ async function verDetalle(id) {
             vote_Average: parseFloat(movieData.vote_average) || 0
         };
 
-        const res = await fetch('https://localhost:7227/api/Movies', {
+        const res = await fetch('http://localhost:5041/api/Movies', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(movieToSave)

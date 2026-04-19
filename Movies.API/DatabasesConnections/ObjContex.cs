@@ -10,6 +10,4 @@ namespace Movies.API.DatabasesConnections
         public DbSet<MovieModel> Movie { get; set; } = null!;
         public DbSet<UserModel> User { get; set; } = null!;
     }
-
-    
-    }
+}
